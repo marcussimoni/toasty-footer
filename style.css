@@ -9,3 +9,20 @@ body {
     position: absolute;
     bottom: 0px;
 }
+.instructions {
+    border: 1px dashed black;
+    width: 1000px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 50px;
+}
+.code {
+
+    font-size: 50px;
+
+}
+
+.align-center {
+    text-align: center;
+}
