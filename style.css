@@ -3,12 +3,28 @@ body {
     padding: 0;
 }
 .main-div {
-    width: 150px;
+    width: 100%;
     height: 150px;
-    margin-left: -160px;
     position: absolute;
     bottom: 0px;
+    
 }
+
+.toasty-left {
+    float: left;
+    margin-left: -160;
+}
+
+.toasty-right {
+    float: right;
+    margin-right:-150px;
+}
+
+.hidder{
+    overflow: hidden;
+    position: relative;
+}
+
 .instructions {
     border: 1px dashed black;
     width: 1000px;
@@ -22,7 +38,6 @@ body {
     font-size: 50px;
 
 }
-
 .align-center {
     text-align: center;
 }
