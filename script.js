@@ -6,10 +6,12 @@ const letterA = 65;
 const letterB = 66;
 
 const audio = new Audio('./toasty.mp3');
-const speed = 3;
+const speed = 2;
 const konamiCode = [arrowUp, arrowUp, arrowDown, arrowDown, arrowLeft, arrowRight, arrowLeft, arrowRight, letterB, letterA]
 
 let keysPressed = [];		
+
+let toastyAppears = 0;
 
 async function checkCode(event){
 
@@ -19,20 +21,21 @@ async function checkCode(event){
         keysPressed.push(keyPressed)
         
         if(contaisKeyPressed(konamiCode, keysPressed)){
-            let image = document.getElementById('toasty')
             
-            let limit = 0;
-            let position = -100;
-
             playAudio();
-
-            position = await moveFromLeftToRight(position, limit, speed, image);
             
-            await sleep(500)
-
-            position = await moveFromRightToLeft(position, speed, image);
+            if(toastyAppears%2==0){
+                const image = document.getElementById('toasty-left')
+                moveImage(image, 'marginLeft');
+            } else {
+                const image = document.getElementById('toasty-right')
+                moveImage(image, 'marginRight')
+            }
             
             clearKeyPressedArray();
+
+            toastyAppears++
+            
         }
         
     } else {
@@ -41,26 +44,27 @@ async function checkCode(event){
 
 }
 
+async function moveImage(image, cssElement){
+    const limit = 0;
+    let position = -150;
+
+    while (position <= limit) {
+        position += speed;
+        image.style[cssElement] = (position) + 'px';
+        await sleep(1);
+    }
+
+    await sleep(500)
+
+    while (position >= -150) {
+        position = (position - speed);
+        image.style[cssElement] = (position) + 'px';
+        await sleep(1);
+    }
+}
+
 function clearKeyPressedArray() {
     keysPressed = [];
-}
-
-async function moveFromRightToLeft(position, speed, image) {
-    while (position >= -160) {
-        position -= speed;
-        image.style.marginLeft = (position) + 'px';
-        await sleep(1);
-    }
-    return position;
-}
-
-async function moveFromLeftToRight(position, limit, speed, image) {
-    while (position <= limit) {
-        position = (position + speed);
-        image.style.marginLeft = (position) + 'px';
-        await sleep(1);
-    }
-    return position;
 }
 
 function playAudio() {
