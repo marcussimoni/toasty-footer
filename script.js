@@ -28,7 +28,7 @@ async function checkCode(event){
 
             position = await moveFromLeftToRight(position, limit, speed, image);
             
-            await sleep(1000)
+            await sleep(500)
 
             position = await moveFromRightToLeft(position, speed, image);
             
